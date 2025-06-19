@@ -21,6 +21,7 @@
       margin: 0;
       font-family: Arial, sans-serif;
       padding: 10px;
+      flex-direction: column;
     }
 
     #calc {
@@ -37,7 +38,7 @@
       width: 100%;
       border-radius: 15px;
       border: none;
-      text-align: right;
+      text-align: left;
       backdrop-filter: blur(15px);
       background: rgba(255, 255, 255, 0.2);
       color: black;
@@ -81,6 +82,18 @@
       color: white;
     }
 
+    footer#copyright {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      color: white;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 12px;
+      border-radius: 15px;
+      font-weight: bold;
+      width: fit-content;
+    }
+
     @media (max-width: 480px) {
       #dsp {
         font-size: 1.5rem;
@@ -107,7 +120,7 @@
 </head>
 <body>
   <div id="calc">
-    <input id="dsp" readonly placeholder="calc here" />
+    <input id="dsp" readonly placeholder="calc here">
     <div id="ks">
       <button onclick="appendToDisplay('+')" class="operator">+</button>
       <button onclick="appendToDisplay('7')">7</button>
@@ -128,6 +141,10 @@
       <button onclick="clearDisplay()" class="operator">AC</button>
     </div>
   </div>
+
+  <footer id="copyright">
+    © Ibrahim Hany - All rights reserved
+  </footer>
 
   <script>
     const dsp = document.getElementById("dsp");
