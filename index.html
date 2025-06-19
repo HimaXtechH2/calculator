@@ -2,10 +2,9 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Calculator</title>
-  <link rel="icon" href="https://i.postimg.cc/h4Z2Br3F/calc.png" type="image/png" />
-
+  <link rel="icon" href="https://i.postimg.cc/h4Z2Br3F/calc.png" type="image/png">
   <style>
     body {
       background: url("https://i.postimg.cc/0Nqq8Z32/pexels-umkreisel-app-956999.jpg") no-repeat fixed;
@@ -100,7 +99,7 @@
       <button onclick="appendToDisplay('4')">4</button>
       <button onclick="appendToDisplay('5')">5</button>
       <button onclick="appendToDisplay('6')">6</button>
-      <button onclick="appendToDisplay('*')" class="operator">×</button>
+      <button onclick="appendToDisplay('*')" class="operator">*</button>
       <button onclick="appendToDisplay('1')">1</button>
       <button onclick="appendToDisplay('2')">2</button>
       <button onclick="appendToDisplay('3')">3</button>
@@ -115,18 +114,22 @@
   <script>
     const dsp = document.getElementById("dsp");
 
-    function appendToDisplay(value) {
+    function appendToDisplay(value)
+      {
       dsp.value += value;
     }
 
-    function clearDisplay() {
+    function clearDisplay()
+      {
       dsp.value = "";
     }
 
     function calculate() {
       try {
         dsp.value = eval(dsp.value);
-      } catch {
+      } 
+      catch
+      {
         dsp.value = "error Bro";
       }
     }
