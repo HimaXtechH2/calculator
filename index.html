@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Calculator</title>
   <link rel="icon" href="https://i.postimg.cc/h4Z2Br3F/calc.png" type="image/png">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background: url("https://i.postimg.cc/0Nqq8Z32/pexels-umkreisel-app-956999.jpg") no-repeat fixed;
       background-position: center;
@@ -14,47 +18,48 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      width: 100vw;
       margin: 0;
+      font-family: Arial, sans-serif;
+      padding: 10px;
     }
 
     #calc {
       backdrop-filter: blur(15px);
       background: rgba(255, 255, 255, 0.1);
-      font-family: Arial, sans-serif;
-      max-width: 200px;
-      width: 90%;
       border-radius: 25px;
       padding: 20px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 400px;
     }
 
     #dsp {
-      width: 75%;
+      width: 100%;
       border-radius: 15px;
       border: none;
       text-align: right;
       backdrop-filter: blur(15px);
       background: rgba(255, 255, 255, 0.2);
-      color:black;
+      color: black;
       padding: 15px;
       margin-bottom: 20px;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: bold;
+      outline: none;
     }
 
     #ks {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
+      gap: 10px;
     }
 
     button {
-      width: 75%;
-      border-radius: 50% 25px 30%;
-	  aspect-ratio: 1 / 1;
-      border:none;
-      font-size: 3rem;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 15px;
+      border: none;
+      font-size: 1.5rem;
       font-weight: bold;
       cursor: pointer;
       background-color: #fff;
@@ -64,7 +69,6 @@
     button:hover {
       transform: scale(1.05);
       background-color: #d3d3d3;
-	  border-radius:55% 30px 35%;
     }
 
     button:active {
@@ -76,14 +80,27 @@
       background-color: orange;
       color: white;
     }
-    @media (max-width: 300px) {
+
+    @media (max-width: 480px) {
       #dsp {
         font-size: 1.5rem;
+        padding: 12px;
+      }
+
+      button {
+        font-size: 1.2rem;
+        border-radius: 10px;
+      }
+    }
+
+    @media (max-width: 320px) {
+      #dsp {
+        font-size: 1.2rem;
         padding: 10px;
       }
 
       button {
-        font-size: 3.2rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -115,22 +132,18 @@
   <script>
     const dsp = document.getElementById("dsp");
 
-    function appendToDisplay(value)
-      {
+    function appendToDisplay(value) {
       dsp.value += value;
     }
 
-    function clearDisplay()
-      {
+    function clearDisplay() {
       dsp.value = "";
     }
 
     function calculate() {
       try {
         dsp.value = eval(dsp.value);
-      } 
-      catch
-      {
+      } catch {
         dsp.value = "error Bro";
       }
     }
