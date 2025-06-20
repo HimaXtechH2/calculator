@@ -157,13 +157,16 @@
       dsp.value = "";
     }
 
-    function calculate() {
-      try {
-        dsp.value = eval(dsp.value);
-      } catch {
-        dsp.value = "error Bro";
-      }
-    }
+  function calculate() {
+  try {
+    const expression = dsp.value.replace(/\b0+(\d+)/g, (_, num) => {
+      return String(parseInt(num, 10));
+    });
+    dsp.value = eval(expression);
+  } catch {
+    dsp.value = "error Bro";
+  }
+}
   </script>
 </body>
 </html>
