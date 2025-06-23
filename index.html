@@ -229,19 +229,21 @@ body.dark-theme {
   --operator-bg: darkorange;
 }
 
+/* background */
 body {
   background: var(--bg-image-light) no-repeat fixed;
   background-position: center;
   background-size: cover;
 }
 
-
+/* لما نضيف كلاس الوضع الليلي */
 body.dark-theme {
   background: var(--bg-image-dark) no-repeat fixed;
   background-position: center;
   background-size: cover;
 }
 
+/* الآلة الحاسبة */
 #calc {
   backdrop-filter: blur(15px);
   background: var(--bg-color);
@@ -268,7 +270,7 @@ button {
   color: white !important;
 }
 
-
+/* الزرار بتاع السويتش */
 .theme-switch {
   position: absolute;
   top: 20px;
@@ -372,13 +374,16 @@ input:checked + .slider::before {
       dsp.value = "";
     }
 
-    function calculate() {
-      try {
-        dsp.value = eval(dsp.value);
-      } catch {
-        dsp.value = "error Bro";
-      }
-    }
+  function calculate() {
+  try {
+    const expression = dsp.value.replace(/\b0+(\d+)/g, (_, num) => {
+      return String(parseInt(num, 10));
+    });
+    dsp.value = eval(expression);
+  } catch {
+    dsp.value = "error Bro";
+  }
+}
 function deleteLastFuckingvalue() {
   dsp.value = dsp.value.slice(0, -1);
 }
