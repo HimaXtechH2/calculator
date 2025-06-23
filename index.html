@@ -89,7 +89,7 @@
       color: white;
       background: rgba(0, 0, 0, 0.4);
       padding: 10px 12px;
-      border-radius: 15px;
+      border-radius: 20px 10px 30%;
       font-weight: bold;
       width: fit-content;
     }
@@ -116,9 +116,216 @@
         font-size: 1rem;
       }
     }
+@keyframes shine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+#dsp::placeholder {
+  font-weight: bold;
+  color: transparent;
+  background: linear-gradient(90deg, red, orange, yellow, red);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+}
+.img-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.img-btn img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius:15px;
+  pointer-events: none;
+}
+
+.img-btn:hover {
+  transform: scale(1.1);
+}
+
+.theme-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-image: url("https://i.postimg.cc/yNHpHPqs/light.png");
+  background-size: cover;
+  background-position: center;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #333;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+  background-image: url("https://i.postimg.cc/cC7sFvMW/dark.png");
+}
+
+:root {
+  --bg-image-light: url('https://i.postimg.cc/0Nqq8Z32/pexels-umkreisel-app-956999.jpg');
+  --bg-image-dark: url('https://i.postimg.cc/FR3bwWW5/pexels-padrinan-19670.png');
+  --bg-color: rgba(255, 255, 255, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.2);
+  --text-color: black;
+  --btn-bg: #fff;
+  --btn-text: black;
+  --operator-bg: orange;
+}
+
+body.dark-theme {
+  --bg-color: rgba(0, 0, 0, 0.5);
+  --input-bg: rgba(0, 0, 0, 0.3);
+  --text-color: white;
+  --btn-bg: #333;
+  --btn-text: white;
+  --operator-bg: darkorange;
+}
+
+body {
+  background: var(--bg-image-light) no-repeat fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+
+body.dark-theme {
+  background: var(--bg-image-dark) no-repeat fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+#calc {
+  backdrop-filter: blur(15px);
+  background: var(--bg-color);
+  border-radius: 25px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 400px;
+  color: var(--text-color);
+}
+
+#dsp {
+  background: var(--input-bg);
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.operator {
+  background-color: var(--operator-bg) !important;
+  color: white !important;
+}
+
+
+.theme-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-image: url("https://i.postimg.cc/yNHpHPqs/light.png");
+  background-size: cover;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #333;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+  background-image: url("https://i.postimg.cc/cC7sFvMW/dark.png");
+}
+
   </style>
 </head>
 <body>
+<label class="theme-switch">
+  <input type="checkbox" id="theme-toggle">
+  <span class="slider">
+  </span>
+</label>
   <div id="calc">
     <input id="dsp" readonly placeholder="calc here">
     <div id="ks">
@@ -139,7 +346,15 @@
       <button onclick="appendToDisplay('.')">.</button>
       <button onclick="calculate()">=</button>
       <button onclick="clearDisplay()" class="operator">AC</button>
+<button onclick="deleteLastFuckingvalue()" class="img-btn">
+  <img src="https://i.postimg.cc/cCg2cMGt/back.png" alt="DEL">
+</button>
+
+
     </div>
+
+
+
   </div>
 
   <footer id="copyright">
@@ -157,16 +372,48 @@
       dsp.value = "";
     }
 
-  function calculate() {
-  try {
-    const expression = dsp.value.replace(/\b0+(\d+)/g, (_, num) => {
-      return String(parseInt(num, 10));
-    });
-    dsp.value = eval(expression);
-  } catch {
-    dsp.value = "error Bro";
+    function calculate() {
+      try {
+        dsp.value = eval(dsp.value);
+      } catch {
+        dsp.value = "error Bro";
+      }
+    }
+function deleteLastFuckingvalue() {
+  dsp.value = dsp.value.slice(0, -1);
+}
+const toggle = document.getElementById('theme-toggle');
+const body = document.body;
+
+
+function applySavedTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    toggle.checked = true;
+    body.classList.add('dark-theme');
+    body.style.backgroundImage = "url('https://i.postimg.cc/FR3bwWW5/pexels-padrinan-19670.png')";
+  } else {
+    toggle.checked = false;
+    body.classList.remove('dark-theme');
+    body.style.backgroundImage = "url('https://i.postimg.cc/0Nqq8Z32/pexels-umkreisel-app-956999.jpg')";
   }
 }
+
+toggle.addEventListener('change', () => {
+  if (toggle.checked) {
+    body.classList.add('dark-theme');
+    body.style.backgroundImage = "url('https://i.postimg.cc/FR3bwWW5/pexels-padrinan-19670.png')";
+    localStorage.setItem('theme', 'dark');
+  } else {
+    body.classList.remove('dark-theme');
+    body.style.backgroundImage = "url('https://i.postimg.cc/0Nqq8Z32/pexels-umkreisel-app-956999.jpg')";
+    localStorage.setItem('theme', 'light');
+  }
+});
+
+applySavedTheme();
+
+
   </script>
 </body>
 </html>
